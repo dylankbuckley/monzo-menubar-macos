@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="Voe-Tx-rLC" id="GzC-gU-4Uq"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MonzoBalance" customModuleProvider="target">
+            <connections>
+                <outlet property="monzoMenu" destination="2jy-Dt-5O0" id="TJt-BW-vlI"/>
+            </connections>
+        </customObject>
+        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <menu id="2jy-Dt-5O0">
+            <items>
+                <menuItem title="£200 Spent Today" tag="1" identifier="spendToday" id="g74-dM-oa1">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="spentTodayClicked:" target="Voe-Tx-rLC" id="WMR-j8-5bI"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="lc4-xv-agQ"/>
+                <menuItem title="Quit" id="IS4-zi-hkG">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="quitClicked:" target="Voe-Tx-rLC" id="6Mv-d4-Xtk"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
+    </objects>
+</document>
