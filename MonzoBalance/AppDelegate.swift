@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let account = "ACCOUNT NUMBER HERE"
     // END
     
-    @objc func getBalances() {
+    @objc func refreshAndDisplayBalances() {
         monzoApi.fetchBalance(account: account, accessToken: accessToken) { (balance) in
             DispatchQueue.main.async {
                 self.statusItem.title = balance[0]
@@ -37,16 +37,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.title = "Loading Balance"
         statusItem.menu = monzoMenu
         
-        monzoApi.fetchBalance(account: account, accessToken: accessToken) { (balance) in
-            DispatchQueue.main.async {
-                self.statusItem.title = balance[0]
-                if let spendToday = self.monzoMenu.item(withTag: 1) {
-                    spendToday.title = "\(balance[1]) Spent Today"
-                }
-            }
-        }
+        refreshAndDisplayBalances()
         
-        var updateTimer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(getBalances), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(refreshAndDisplayBalances), userInfo: nil, repeats: true)
         
     }
 
