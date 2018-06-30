@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		496942F120E6E644009A1E6F /* MonzoCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496942F020E6E644009A1E6F /* MonzoCredentials.swift */; };
+		496942F420E6EA09009A1E6F /* CredentialsInputWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496942F220E6EA09009A1E6F /* CredentialsInputWindowController.swift */; };
+		496942F520E6EA09009A1E6F /* CredentialsInputWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496942F320E6EA09009A1E6F /* CredentialsInputWindow.xib */; };
 		9C952DA520D3E5F700DEFC13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C952DA420D3E5F700DEFC13 /* AppDelegate.swift */; };
 		9C952DA720D3E5F700DEFC13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C952DA620D3E5F700DEFC13 /* Assets.xcassets */; };
 		9C952DAA20D3E5F700DEFC13 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C952DA820D3E5F700DEFC13 /* MainMenu.xib */; };
@@ -14,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		496942F020E6E644009A1E6F /* MonzoCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoCredentials.swift; sourceTree = "<group>"; };
+		496942F220E6EA09009A1E6F /* CredentialsInputWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsInputWindowController.swift; sourceTree = "<group>"; };
+		496942F320E6EA09009A1E6F /* CredentialsInputWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CredentialsInputWindow.xib; sourceTree = "<group>"; };
 		9C952DA120D3E5F700DEFC13 /* MonzoBalance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonzoBalance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C952DA420D3E5F700DEFC13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C952DA620D3E5F700DEFC13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +65,9 @@
 				9C952DA820D3E5F700DEFC13 /* MainMenu.xib */,
 				9C952DAB20D3E5F700DEFC13 /* Info.plist */,
 				9C952DAC20D3E5F700DEFC13 /* MonzoBalance.entitlements */,
+				496942F020E6E644009A1E6F /* MonzoCredentials.swift */,
+				496942F220E6EA09009A1E6F /* CredentialsInputWindowController.swift */,
+				496942F320E6EA09009A1E6F /* CredentialsInputWindow.xib */,
 			);
 			path = MonzoBalance;
 			sourceTree = "<group>";
@@ -127,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C952DA720D3E5F700DEFC13 /* Assets.xcassets in Resources */,
+				496942F520E6EA09009A1E6F /* CredentialsInputWindow.xib in Resources */,
 				9C952DAA20D3E5F700DEFC13 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,7 +149,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C952DB320D3E7B400DEFC13 /* monzoAPI.swift in Sources */,
+				496942F420E6EA09009A1E6F /* CredentialsInputWindowController.swift in Sources */,
 				9C952DA520D3E5F700DEFC13 /* AppDelegate.swift in Sources */,
+				496942F120E6E644009A1E6F /* MonzoCredentials.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +289,7 @@
 				CODE_SIGN_ENTITLEMENTS = MonzoBalance/MonzoBalance.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = J7YRRCGD5Y;
+				DEVELOPMENT_TEAM = 3BZ4Q376K2;
 				INFOPLIST_FILE = MonzoBalance/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -296,7 +308,7 @@
 				CODE_SIGN_ENTITLEMENTS = MonzoBalance/MonzoBalance.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = J7YRRCGD5Y;
+				DEVELOPMENT_TEAM = 3BZ4Q376K2;
 				INFOPLIST_FILE = MonzoBalance/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
