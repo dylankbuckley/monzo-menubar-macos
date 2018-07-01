@@ -17,12 +17,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // GET THESE CREDENTIALS FROM DEVELOPERS.MONZO.COM
     // DO NOT PUBLISH THEM IN PUBLIC.
-    var credentials = MonzoCredentials(accountId: "ACCOUNT NUMBER HERE", accessToken: "ACCESS TOKEN HERE")
+    var credentials = MonzoCredentials(accountId: "", accessToken: "")
     // END
     
     func setCredentials(credentials newCredentials: MonzoCredentials) -> Void {
-        refreshAndDisplayBalances(credentials: newCredentials)
-        credentials = newCredentials
+        if credentials.accessToken != "" {
+            refreshAndDisplayBalances(credentials: newCredentials)
+            credentials = newCredentials
+        }
     }
     
     func refreshAndDisplayBalances(credentials: MonzoCredentials) {
@@ -30,6 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             DispatchQueue.main.async {
                 self.statusItem.title = balance[0]
                 if let spendToday = self.monzoMenu.item(withTag: 1) {
+                    spendToday.isHidden = false
                     spendToday.title = "\(balance[1]) Spent Today"
                 }
             }
@@ -42,7 +45,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        statusItem.title = "Loading Balance"
+        if credentials.accessToken != "" {
+            statusItem.title = "Loading Balance"
+        } else {
+            statusItem.title = "Enter Your Monzo Credentials"
+            if let spendToday = self.monzoMenu.item(withTag: 1) {
+                spendToday.isHidden = true
+            }
+        }
+        
         statusItem.menu = monzoMenu
         
         refreshAndDisplayBalances(credentials: credentials)

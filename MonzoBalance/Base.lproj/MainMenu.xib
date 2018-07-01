@@ -19,7 +19,7 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu id="2jy-Dt-5O0">
             <items>
-                <menuItem title="£200 Spent Today" tag="1" identifier="spendToday" id="g74-dM-oa1">
+                <menuItem tag="1" identifier="spendToday" id="g74-dM-oa1">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="spentTodayClicked:" target="Voe-Tx-rLC" id="WMR-j8-5bI"/>
