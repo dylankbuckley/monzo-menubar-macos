@@ -17,12 +17,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // GET THESE CREDENTIALS FROM DEVELOPERS.MONZO.COM
     // DO NOT PUBLISH THEM IN PUBLIC.
-    let accessToken = "ACCESS TOKEN HERE"
-    let account = "ACCOUNT NUMBER HERE"
+    var credentials = MonzoCredentials(accountId: "ACCOUNT NUMBER HERE", accessToken: "ACCESS TOKEN HERE")
     // END
     
-    @objc func refreshAndDisplayBalances() {
-        monzoApi.fetchBalance(account: account, accessToken: accessToken) { (balance) in
+    func setCredentials(credentials newCredentials: MonzoCredentials) -> Void {
+        refreshAndDisplayBalances(credentials: newCredentials)
+        credentials = newCredentials
+    }
+    
+    func refreshAndDisplayBalances(credentials: MonzoCredentials) {
+        monzoApi.fetchBalance(account: credentials.accountId, accessToken: credentials.accessToken) { (balance) in
             DispatchQueue.main.async {
                 self.statusItem.title = balance[0]
                 if let spendToday = self.monzoMenu.item(withTag: 1) {
@@ -31,15 +35,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
+    
+    @objc func refreshBalances(){
+        refreshAndDisplayBalances(credentials: credentials)
+    }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         statusItem.title = "Loading Balance"
         statusItem.menu = monzoMenu
         
-        refreshAndDisplayBalances()
+        refreshAndDisplayBalances(credentials: credentials)
         
-        _ = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(refreshAndDisplayBalances), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(refreshBalances), userInfo: nil, repeats: true)
         
     }
 
@@ -49,6 +57,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         NSApplication.shared.terminate(self)
+    }
+    
+    @IBAction func enterCredentialsManually(_ sender: Any) {
+        let viewController = CredentialsInputWindow(nibName: NSNib.Name( "CredentialsInputWindow" ), bundle: Bundle(identifier: "MonzoBalance"))
+        let window = NSWindow(contentViewController: viewController)
+        window.makeKeyAndOrderFront(self)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
     @IBAction func spentTodayClicked(_ sender: NSMenuItem) {
