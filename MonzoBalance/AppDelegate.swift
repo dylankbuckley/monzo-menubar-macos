@@ -20,6 +20,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var credentials = MonzoCredentials(accountId: "ACCOUNT NUMBER HERE", accessToken: "ACCESS TOKEN HERE")
     // END
     
+    func setCredentials(credentials newCredentials: MonzoCredentials) -> Void {
+        refreshAndDisplayBalances(credentials: newCredentials)
+        credentials = newCredentials
+    }
+    
     func refreshAndDisplayBalances(credentials: MonzoCredentials) {
         monzoApi.fetchBalance(account: credentials.accountId, accessToken: credentials.accessToken) { (balance) in
             DispatchQueue.main.async {
@@ -55,8 +60,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func enterCredentialsManually(_ sender: Any) {
-        let wc = CredentialsInputWindowController(windowNibName: NSNib.Name( "CredentialsInputWindow" ))
-        wc.showWindow(nil)
+        let viewController = CredentialsInputWindow(nibName: NSNib.Name( "CredentialsInputWindow" ), bundle: Bundle(identifier: "MonzoBalance"))
+        let window = NSWindow(contentViewController: viewController)
+        window.makeKeyAndOrderFront(self)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
     @IBAction func spentTodayClicked(_ sender: NSMenuItem) {
