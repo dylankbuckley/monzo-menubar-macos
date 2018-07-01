@@ -20,8 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var credentials = MonzoCredentials(accountId: "", accessToken: "")
     // END
     
-    func setCredentials(credentials newCredentials: MonzoCredentials) -> Void {
-        if credentials.accessToken != "" {
+    func setCredentials(newCredentials: MonzoCredentials) -> Void {
+        if newCredentials.accessToken != "" {
             refreshAndDisplayBalances(credentials: newCredentials)
             credentials = newCredentials
         }
@@ -74,6 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let viewController = CredentialsInputWindow(nibName: NSNib.Name( "CredentialsInputWindow" ), bundle: Bundle(identifier: "MonzoBalance"))
         let window = NSWindow(contentViewController: viewController)
         window.makeKeyAndOrderFront(self)
+        window.title = "Enter Your Credentials"
         NSApp.activate(ignoringOtherApps: true)
     }
     
