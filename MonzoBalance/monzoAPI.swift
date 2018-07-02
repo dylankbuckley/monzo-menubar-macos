@@ -38,9 +38,7 @@ class monzoAPI {
                     let json: JSONDict
                     do {
                         json = try JSONSerialization.jsonObject(with: data!, options: []) as! JSONDict
-                        let rawSpendToday = json["spend_today"] as! Double
-                        let rawBalance = json["balance"] as! Double
-                        success(["£\(rawBalance / 100.0)", "£\((rawSpendToday / 100.0) * -1)"])
+                        success([self.formatAsPounds(rawValue: json["balance"]), self.formatAsPounds(rawValue: json["spend_today"])])
                     } catch {
                         NSLog("JSON Parsing Failed: \(error)")
                     }
@@ -55,5 +53,18 @@ class monzoAPI {
             
         }
         task.resume()
+    }
+    
+    func formatAsPounds(rawValue: AnyObject?) -> String {
+        let rawAmountPence = rawValue as! Double
+        let rawAmountPounds = abs(rawAmountPence / 100.0)
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_GB")
+        formatter.numberStyle = .currency
+        if let formattedAmount = formatter.string(from: NSNumber(floatLiteral: rawAmountPounds)) {
+            return formattedAmount
+        } else {
+            return "NaN"
+        }
     }
 }
