@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var monzoMenu: NSMenu!
     let monzoApi = monzoAPI()
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    let userDefaults = UserDefaults()
     
     // GET THESE CREDENTIALS FROM DEVELOPERS.MONZO.COM
     // DO NOT PUBLISH THEM IN PUBLIC.
@@ -22,8 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func setCredentials(newCredentials: MonzoCredentials) -> Void {
         if newCredentials.accessToken != "" {
-            refreshAndDisplayBalances(credentials: newCredentials)
+            
+            userDefaults.set(newCredentials.accountId, forKey: "accountId")
+            userDefaults.set(newCredentials.accessToken, forKey: "accessToken")
+            refreshAndDisplayBalances(credentials: MonzoCredentials(accountId: userDefaults.string(forKey: "accountId")!, accessToken: userDefaults.string(forKey: "accessToken")!))
             credentials = newCredentials
+
         }
     }
     
@@ -56,7 +61,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         statusItem.menu = monzoMenu
         
-        refreshAndDisplayBalances(credentials: credentials)
+        if userDefaults.string(forKey: "accountId") != nil && userDefaults.string(forKey: "accountId") != nil {
+            credentials = MonzoCredentials(accountId: userDefaults.string(forKey: "accountId")!, accessToken: userDefaults.string(forKey: "accessToken")!)
+            refreshAndDisplayBalances(credentials: credentials)
+        } else {
+            refreshAndDisplayBalances(credentials: credentials)
+        }
         
         _ = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(refreshBalances), userInfo: nil, repeats: true)
         
