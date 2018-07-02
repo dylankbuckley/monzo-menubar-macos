@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var monzoMenu: NSMenu!
     let monzoApi = monzoAPI()
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    let userDefaults = UserDefaults()
     
     // GET THESE CREDENTIALS FROM DEVELOPERS.MONZO.COM
     // DO NOT PUBLISH THEM IN PUBLIC.
@@ -22,8 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func setCredentials(newCredentials: MonzoCredentials) -> Void {
         if newCredentials.accessToken != "" {
-            refreshAndDisplayBalances(credentials: newCredentials)
+            
+            userDefaults.set(newCredentials.accountId, forKey: "accountId")
+            userDefaults.set(newCredentials.accessToken, forKey: "accessToken")
+            refreshAndDisplayBalances(credentials: MonzoCredentials(accountId: userDefaults.string(forKey: "accountId")!, accessToken: userDefaults.string(forKey: "accessToken")!))
             credentials = newCredentials
+
         }
     }
     
@@ -55,6 +60,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         statusItem.menu = monzoMenu
+        
+        credentials = MonzoCredentials(accountId: userDefaults.string(forKey: "accountId")!, accessToken: userDefaults.string(forKey: "accessToken")!)
         
         refreshAndDisplayBalances(credentials: credentials)
         
