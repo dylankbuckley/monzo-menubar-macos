@@ -308,7 +308,7 @@
 				CODE_SIGN_ENTITLEMENTS = MonzoBalance/MonzoBalance.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3BZ4Q376K2;
+				DEVELOPMENT_TEAM = J7YRRCGD5Y;
 				INFOPLIST_FILE = MonzoBalance/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

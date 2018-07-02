@@ -61,9 +61,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         statusItem.menu = monzoMenu
         
-        credentials = MonzoCredentials(accountId: userDefaults.string(forKey: "accountId")!, accessToken: userDefaults.string(forKey: "accessToken")!)
-        
-        refreshAndDisplayBalances(credentials: credentials)
+        if userDefaults.string(forKey: "accountId") != nil && userDefaults.string(forKey: "accountId") != nil {
+            credentials = MonzoCredentials(accountId: userDefaults.string(forKey: "accountId")!, accessToken: userDefaults.string(forKey: "accessToken")!)
+            refreshAndDisplayBalances(credentials: credentials)
+        } else {
+            refreshAndDisplayBalances(credentials: credentials)
+        }
         
         _ = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(refreshBalances), userInfo: nil, repeats: true)
         
