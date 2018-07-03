@@ -21,6 +21,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var credentials = MonzoCredentials(accountId: "", accessToken: "")
     // END
     
+    @IBAction func emailMagicLink(_ sender: Any) {
+        if let url = URL(string: "https://auth.monzo.com/?redirect_uri=https%3A%2F%2Fdevelopers.monzo.com%2Flogin%3Fredirect%3D%252Fapi%252Fplayground&client_id=oauthclient_000094PvINDGzT3k6tz8jp&response_type=code"),
+            NSWorkspace.shared.open(url) {
+        }
+    }
+    
     func setCredentials(newCredentials: MonzoCredentials) -> Void {
         if newCredentials.accessToken != "" {
             

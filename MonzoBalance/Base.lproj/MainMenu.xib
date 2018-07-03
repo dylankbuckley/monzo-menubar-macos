@@ -28,6 +28,9 @@
                 <menuItem isSeparatorItem="YES" id="mbp-6i-561"/>
                 <menuItem title="Email me my credentials" id="khM-7E-shX">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="emailMagicLink:" target="Voe-Tx-rLC" id="c7C-qR-R9y"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Enter credentials manually" id="XcP-rW-Vyo">
                     <modifierMask key="keyEquivalentModifierMask"/>
